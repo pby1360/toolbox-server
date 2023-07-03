@@ -1,17 +1,5 @@
 spring:
   datasource:
-    hikari:
-      auth-db:
-        jdbc-url: jdbc:mysql://toolbox-instance-1.cczpiq6o68pr.ap-northeast-2.rds.amazonaws.com:3306/auth?characterEncoding=UTF-8&serverTimezone=UTC
-        username: admin
-        password: comet2059!
-        driver-class-name: com.mysql.cj.jdbc.Driver
-      memo-db:
-        jdbc-url: jdbc:mysql://toolbox-instance-1.cczpiq6o68pr.ap-northeast-2.rds.amazonaws.com:3306/memo?characterEncoding=UTF-8&serverTimezone=UTC
-        username: admin
-        password: comet2059!
-        driver-class-name: com.mysql.cj.jdbc.Driver
-      minimum-idle: 1
   jpa:
     properties:
       hibernate:
