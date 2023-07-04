@@ -33,8 +33,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         configuration.addAllowedOrigin("http://52.79.194.86:3000");
         configuration.addAllowedOrigin("http://www.toolbox.monster");
 
-        configuration.getAllowedOrigins().forEach(origin -> System.out.println(origin));
-
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
         configuration.setAllowCredentials(true);
