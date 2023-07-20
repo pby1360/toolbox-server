@@ -26,19 +26,12 @@ public class AuthController {
     }
 
     @GetMapping("/google-login")
-    public ResponseEntity loginWithGoogle (@RequestParam String code, @RequestParam String scope) throws URISyntaxException {
+    public ResponseEntity loginWithGoogle (@RequestParam String code) throws URISyntaxException {
         log.info(":: loginWithGoogle");
 
         try {
-
             SignInResponse response = loginService.login(code);
-
-            log.info("response ? {}", response.toString());
-
-            URI redirectUri = new URI("http://localhost:3000/login");
-            HttpHeaders httpHeaders = new HttpHeaders();
-            httpHeaders.setLocation(redirectUri);
-            return ResponseEntity.status(HttpStatus.SEE_OTHER).headers(httpHeaders).body(response);
+            return ResponseEntity.ok(response);
 
         } catch (IllegalAccessException e) {
             return ResponseEntity.internalServerError().body(null);

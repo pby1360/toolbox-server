@@ -36,7 +36,7 @@ public class LoginService {
 
         String clientId = "676639504875-a0lpq23f7nvdnj3n4tojeh7mqc339jfg.apps.googleusercontent.com";
         String clientSecret = "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";
-        String redirectUri = "http://localhost:8080/auth/google-login";
+        String redirectUri = "http://localhost:3000/login";
         String tokenUri = "https://oauth2.googleapis.com/token";
 
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
