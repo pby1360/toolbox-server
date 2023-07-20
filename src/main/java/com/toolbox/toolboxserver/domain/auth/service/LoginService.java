@@ -54,6 +54,7 @@ public class LoginService {
         ResponseEntity<JsonNode> responseNode = restTemplate.exchange(tokenUri, HttpMethod.POST, entity, JsonNode.class);
         JsonNode accessTokenNode = responseNode.getBody();
         return accessTokenNode.get("access_token").asText();
+
     }
 
      public GoogleUserInfo getUserResource(String accessToken) {
