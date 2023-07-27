@@ -7,4 +7,7 @@ import java.util.List;
 
 public interface MemoService {
     List<Memo> list();
+
+    void save(Memo memo);
+    void delete(long id);
 }

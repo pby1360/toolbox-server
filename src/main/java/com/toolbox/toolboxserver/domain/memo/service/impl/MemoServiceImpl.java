@@ -3,7 +3,9 @@ package com.toolbox.toolboxserver.domain.memo.service.impl;
 import com.toolbox.toolboxserver.domain.memo.entity.Memo;
 import com.toolbox.toolboxserver.domain.memo.repository.MemoRepository;
 import com.toolbox.toolboxserver.domain.memo.service.MemoService;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
@@ -19,5 +21,15 @@ public class MemoServiceImpl implements MemoService {
     @Override
     public List<Memo> list() {
         return repository.findAll();
+    }
+
+    @Override
+    public void save(Memo memo) {
+        repository.save(memo);
+    }
+
+    @Override
+    public void delete(long id) {
+        repository.deleteById(id);
     }
 }
