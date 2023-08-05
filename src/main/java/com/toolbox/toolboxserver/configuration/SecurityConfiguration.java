@@ -51,6 +51,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         configuration.addAllowedOrigin("http://localhost:3000");
         configuration.addAllowedOrigin("http://15.164.218.45:3000");
         configuration.addAllowedOrigin("http://www.toolbox.monster");
+        configuration.addAllowedOrigin("http://toolbox.monster");
 
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");

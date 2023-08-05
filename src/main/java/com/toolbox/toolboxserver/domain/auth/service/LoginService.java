@@ -7,8 +7,8 @@ import com.toolbox.toolboxserver.domain.auth.dto.SignInResponse;
 import com.toolbox.toolboxserver.domain.auth.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -18,6 +18,16 @@ import java.util.Collections;
 
 @Service
 public class LoginService {
+    @Value("${login.google.client-id}")
+    private String CLIENT_ID;
+    @Value("${login.google.client-secret}")
+    private String CLIENT_SECRET;
+    @Value("${login.google.redirect-uri}")
+    private String REDIRECT_URI;
+    @Value("${login.google.token-uri}")
+    private String TOKEN_URI;
+    @Value("${login.google.resource-uri}")
+    private String RESOURCE_URI;
 
     private Logger log = LoggerFactory.getLogger(getClass().getSimpleName());
 
@@ -34,16 +44,13 @@ public class LoginService {
 
     public String getAccessToken (String code) {
 
-        String clientId = "676639504875-a0lpq23f7nvdnj3n4tojeh7mqc339jfg.apps.googleusercontent.com";
-        String clientSecret = "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";
-        String redirectUri = "http://localhost:3000/login";
-        String tokenUri = "https://oauth2.googleapis.com/token";
+        log.info(":: REDIRECT_URI ? {}", REDIRECT_URI);
 
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("code", code);
-        params.add("client_id", clientId);
-        params.add("client_secret", clientSecret);
-        params.add("redirect_uri", redirectUri);
+        params.add("client_id", CLIENT_ID);
+        params.add("client_secret", CLIENT_SECRET);
+        params.add("redirect_uri", REDIRECT_URI);
         params.add("grant_type", "authorization_code");
 
         HttpHeaders headers = new HttpHeaders();
@@ -51,19 +58,17 @@ public class LoginService {
 
         HttpEntity entity = new HttpEntity(params, headers);
 
-        ResponseEntity<JsonNode> responseNode = restTemplate.exchange(tokenUri, HttpMethod.POST, entity, JsonNode.class);
+        ResponseEntity<JsonNode> responseNode = restTemplate.exchange(TOKEN_URI, HttpMethod.POST, entity, JsonNode.class);
         JsonNode accessTokenNode = responseNode.getBody();
         return accessTokenNode.get("access_token").asText();
 
     }
 
      public GoogleUserInfo getUserResource(String accessToken) {
-        String resourceUri = "https://www.googleapis.com/oauth2/v2/userinfo";
-
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + accessToken);
         HttpEntity entity = new HttpEntity(headers);
-        return restTemplate.exchange(resourceUri, HttpMethod.GET, entity, GoogleUserInfo.class).getBody();
+        return restTemplate.exchange(RESOURCE_URI, HttpMethod.GET, entity, GoogleUserInfo.class).getBody();
     }
 
     public SignInResponse login(String code)  throws IllegalAccessException{

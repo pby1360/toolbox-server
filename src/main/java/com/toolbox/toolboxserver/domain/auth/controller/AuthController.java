@@ -28,6 +28,7 @@ public class AuthController {
     @GetMapping("/google-login")
     public ResponseEntity loginWithGoogle (@RequestParam String code) throws URISyntaxException {
         log.info(":: loginWithGoogle");
+        log.info(":: code ? {}", code);
 
         try {
             SignInResponse response = loginService.login(code);

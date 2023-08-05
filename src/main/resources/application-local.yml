@@ -1,0 +1,37 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    hikari:
+      auth-db:
+        jdbc-url: jdbc:mysql://toolbox-1.cczpiq6o68pr.ap-northeast-2.rds.amazonaws.com:3306/auth?characterEncoding=UTF-8&serverTimezone=UTC
+        username: admin
+        password: comet2059!
+        driver-class-name: com.mysql.cj.jdbc.Driver
+      memo-db:
+        jdbc-url: jdbc:mysql://toolbox-1.cczpiq6o68pr.ap-northeast-2.rds.amazonaws.com:3306/memo?characterEncoding=UTF-8&serverTimezone=UTC
+        username: admin
+        password: comet2059!
+        driver-class-name: com.mysql.cj.jdbc.Driver
+      minimum-idle: 1
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+  jwt:
+    secret: 'quddbscomet5015!thddlquddbscomet5015!thddlquddbscomet5015!thddl'
+server:
+  port: 8080
+login:
+  google:
+    client-id: ''
+    client-secret: ''
+    redirect-uri: 'http://localhost:3000/login'
+    token-uri: 'https://oauth2.googleapis.com/token'
+    resource-uri: 'https://www.googleapis.com/oauth2/v2/userinfo'
