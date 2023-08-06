@@ -29,7 +29,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         response.setStatus(401);
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
-        response.getWriter().write(objectMapper.writeValueAsString("인증이 실패하였습니다."));
+        response.getWriter().write(objectMapper.writeValueAsString("TOKEN_EXPIRED"));
 //        response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     }
 }
