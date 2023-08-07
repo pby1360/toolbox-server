@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 public interface MemoService {
-    List<Memo> list();
-
+    List<Memo> list(Long userId);
+    Memo findById(Long id);
     void save(Memo memo);
-    void delete(long id);
+    void delete(Long id);
 }

@@ -22,9 +22,14 @@ public class MemoController {
         this.memoService = memoService;
     }
 
-    @GetMapping
-    public List<Memo> getList () {
-        return memoService.list();
+    @GetMapping("/{id}")
+    public Memo getMemo (@PathVariable Long id) {
+        return memoService.findById(id);
+    }
+
+    @GetMapping("/users/{userId}")
+    public List<Memo> getList (@PathVariable Long userId) {
+        return memoService.list(userId);
     }
 
     @PostMapping
@@ -34,7 +39,7 @@ public class MemoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteMemo (@PathVariable long id) {
+    public ResponseEntity deleteMemo (@PathVariable Long id) {
         memoService.delete(id);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }

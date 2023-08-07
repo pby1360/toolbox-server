@@ -19,8 +19,13 @@ public class MemoServiceImpl implements MemoService {
     }
 
     @Override
-    public List<Memo> list() {
-        return repository.findAll();
+    public List<Memo> list(Long userId) {
+        return repository.findByUserId(userId);
+    }
+
+    @Override
+    public Memo findById(Long id) {
+        return repository.findById(id).orElseThrow();
     }
 
     @Override
@@ -29,7 +34,7 @@ public class MemoServiceImpl implements MemoService {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(Long id) {
         repository.deleteById(id);
     }
 }
