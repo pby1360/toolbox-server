@@ -96,6 +96,7 @@ public class LoginService {
                 .roles(null)
                 .token(token)
                 .expiredAt(tokenProvider.getExpiration(token).getTime())
+                .image(userInfo.getPicture())
                 .build();
     }
 }

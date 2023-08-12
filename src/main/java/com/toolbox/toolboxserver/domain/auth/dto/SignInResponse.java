@@ -16,6 +16,7 @@ public class SignInResponse {
     private Set<String> roles;
     private String token;
     private long expiredAt;
+    private String image;
 
     // TODO: 2023-03-22 add User Information field 
     // private User user;

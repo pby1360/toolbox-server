@@ -20,7 +20,9 @@ public class MemoServiceImpl implements MemoService {
 
     @Override
     public List<Memo> list(Long userId) {
-        return repository.findByUserId(userId);
+        List<Memo> list = repository.findByUserId(userId);
+        list.forEach(memo -> System.out.println(memo.getTitle()));
+        return list;
     }
 
     @Override
@@ -29,9 +31,7 @@ public class MemoServiceImpl implements MemoService {
     }
 
     @Override
-    public void save(Memo memo) {
-        repository.save(memo);
-    }
+    public void save(Memo memo) { repository.save(memo); }
 
     @Override
     public void delete(Long id) {
