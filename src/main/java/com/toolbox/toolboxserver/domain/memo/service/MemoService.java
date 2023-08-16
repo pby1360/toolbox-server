@@ -8,6 +8,6 @@ import java.util.List;
 public interface MemoService {
     List<Memo> list(Long userId);
     Memo findById(Long id);
-    void save(Memo memo);
+    Memo save(Memo memo);
     void delete(Long id);
 }
