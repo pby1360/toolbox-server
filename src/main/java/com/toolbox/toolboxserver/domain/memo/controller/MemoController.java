@@ -1,7 +1,9 @@
 package com.toolbox.toolboxserver.domain.memo.controller;
 
+import com.toolbox.toolboxserver.domain.memo.dto.WorkspaceDTO;
 import com.toolbox.toolboxserver.domain.memo.entity.Memo;
 import com.toolbox.toolboxserver.domain.memo.service.MemoService;
+import com.toolbox.toolboxserver.domain.memo.service.WorkspaceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +20,38 @@ import java.util.Map;
 @Slf4j
 public class MemoController {
 
-
     private MemoService memoService;
+    private WorkspaceService workspaceService;
 
-    public MemoController(MemoService memoService) {
+    public MemoController(MemoService memoService, WorkspaceService workspaceService) {
         this.memoService = memoService;
+        this.workspaceService = workspaceService;
+    }
+
+    @PostMapping("/users/{userId}/workspace")
+    public ResponseEntity<WorkspaceDTO> createWorkspace (@PathVariable Long userId, @RequestBody WorkspaceDTO workspace) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(workspaceService.create(workspace));
+    }
+
+    @GetMapping("/users/{userId}/workspace")
+    public List<WorkspaceDTO> getWorkspaceList (@PathVariable Long userId) {
+        return workspaceService.list(userId);
+    }
+
+    @GetMapping("/users/{userId}/workspace/{id}")
+    public WorkspaceDTO getWorkspace (@PathVariable Long userId, @PathVariable Long id) {
+        return workspaceService.get(id);
+    }
+
+    @DeleteMapping("/users/{userId}/workspace/{id}")
+    public ResponseEntity deleteWorkspace (@PathVariable Long userId, @PathVariable Long id) {
+        workspaceService.delete(id);
+        return ResponseEntity.status(HttpStatus.OK).body(null);
+    }
+
+    @PutMapping("/users/{userId}/workspace/{id}")
+    public ResponseEntity<WorkspaceDTO> modifyWorkspace (@PathVariable Long userId, @PathVariable Long id,@RequestBody WorkspaceDTO workspace) {
+        return ResponseEntity.status(HttpStatus.OK).body(workspaceService.modify(workspace));
     }
 
     @GetMapping("/{id}")
