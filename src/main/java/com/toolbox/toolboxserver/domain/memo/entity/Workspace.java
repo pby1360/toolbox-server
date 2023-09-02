@@ -21,6 +21,10 @@ public class Workspace {
     private Long userId;
     private String name;
     private String description;
+
+    @ManyToOne
+    @JoinColumn(name="project_id")
+    private Project project;
     @CreatedDate
     private LocalDateTime createdAt;
     @LastModifiedDate

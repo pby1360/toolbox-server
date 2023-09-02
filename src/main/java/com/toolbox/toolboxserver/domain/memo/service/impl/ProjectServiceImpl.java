@@ -1,6 +1,7 @@
 package com.toolbox.toolboxserver.domain.memo.service.impl;
 
 import com.toolbox.toolboxserver.domain.memo.dto.ProjectDTO;
+import com.toolbox.toolboxserver.domain.memo.dto.WorkspaceDTO;
 import com.toolbox.toolboxserver.domain.memo.entity.Project;
 import com.toolbox.toolboxserver.domain.memo.repository.ProjectRepository;
 import com.toolbox.toolboxserver.domain.memo.service.ProjectService;
@@ -27,6 +28,18 @@ public class ProjectServiceImpl implements ProjectService {
                 .userId(project.getUserId())
                 .name(project.getName())
                 .description(project.getDescription())
+                .workspaceList(
+                        project.getWorkspaceList().stream().map(workspace ->
+                                WorkspaceDTO.builder()
+                                        .id(workspace.getId())
+                                        .userId(workspace.getUserId())
+                                        .name(workspace.getName())
+                                        .description(workspace.getDescription())
+                                        .createdAt(workspace.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                                        .modifiedAt(workspace.getModifiedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                                        .build()
+                        ).collect(Collectors.toList())
+                )
                 .createdAt(project.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .modifiedAt(project.getModifiedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .build();
@@ -82,6 +95,18 @@ public class ProjectServiceImpl implements ProjectService {
                         .userId(project.getUserId())
                         .name(project.getName())
                         .description(project.getDescription())
+                        .workspaceList(
+                                project.getWorkspaceList().stream().map(workspace ->
+                                        WorkspaceDTO.builder()
+                                                .id(workspace.getId())
+                                                .userId(workspace.getUserId())
+                                                .name(workspace.getName())
+                                                .description(workspace.getDescription())
+                                                .createdAt(workspace.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                                                .modifiedAt(workspace.getModifiedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                                                .build()
+                                ).collect(Collectors.toList())
+                        )
                         .createdAt(project.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                         .modifiedAt(project.getModifiedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .build()).collect(Collectors.toList());

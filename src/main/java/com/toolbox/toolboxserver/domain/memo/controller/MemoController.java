@@ -43,6 +43,22 @@ public class MemoController {
         return projectService.list(userId);
     }
 
+    @PutMapping("/users/{userId}/project/{id}")
+    public ResponseEntity<ProjectDTO> modifyProject (@PathVariable Long userId, @PathVariable Long id,@RequestBody ProjectDTO projectDTO) {
+        return ResponseEntity.status(HttpStatus.OK).body(projectService.modify(projectDTO));
+    }
+
+    @DeleteMapping("/users/{userId}/project/{id}")
+    public ResponseEntity deleteProject (@PathVariable Long userId, @PathVariable Long id) {
+        projectService.delete(id);
+        return ResponseEntity.status(HttpStatus.OK).body(null);
+    }
+
+    @GetMapping("/project/{id}")
+    public ProjectDTO getProject (@PathVariable Long id) {
+        return projectService.get(id);
+    }
+
     @PostMapping("/users/{userId}/workspace")
     public ResponseEntity<WorkspaceDTO> createWorkspace (@PathVariable Long userId, @RequestBody WorkspaceDTO workspace) {
         return ResponseEntity.status(HttpStatus.CREATED).body(workspaceService.create(workspace));

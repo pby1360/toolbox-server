@@ -9,6 +9,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,10 +23,14 @@ public class Project {
     private Long userId;
     private String name;
     private String description;
+    @OneToMany(mappedBy = "project")
+    private List<Workspace> workspaceList = new ArrayList<>();
     @CreatedDate
     private LocalDateTime createdAt;
     @LastModifiedDate
     private LocalDateTime modifiedAt;
+
+
 
     private Project(Long userId, String name, String description) {
         this.userId = userId;
